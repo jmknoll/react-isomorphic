@@ -42,7 +42,42 @@ proxy.on('error', (error, req, res) => {
   res.end(JSON.stringify(json));
 });
 
+app.use((req, res) => {
+  const memoryHistory = createHistory(req.originalUrl);
+  const store = createStore(memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
+  function hydrateOnClient() {
+    res.send(`<!doctype html>${ReactDOM.renderToString(<Default store={store} />)}`);
+  }
+  match({ history, routes: getRoutes(store), location: req.originalUrl },
+  (error, redirectLocation, renderProps) => {
+    if (redirectLocation) {
+      res.redirect(redirectLocation.pathname + redirectLocation.search);
+    } else if (error) {
+      console.error('ROUTER ERROR:', pretty.render(error));
+      res.status(500);
+      hydrateOnClient();
+    } else if (renderProps) {
+      const component = (
+        <Provider store={store} key="provider">
+          <RouterContext {...renderProps} />
+        </Provider>
+      );
+      res.status(200);
+      global.navigator = { userAgent: req.headers['user-agent'] };
+      res.send(`<!doctype html>${ReactDOM.renderToStaticMarkup(<Default component={component} store={store} />)}`);
+    } else {
+      res.status(404).send('Not found');
+    }
+  });
+});
 app.listen(port, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.info(`Server listening on port ${port}!`);
+  }
+});app.listen(port, (err) => {
   if (err) {
     console.error(err)
   } else {
