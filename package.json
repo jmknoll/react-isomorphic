@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"npm run start-api\" \"npm run start-server\" \"npm run webpack-dev-server\"",
-    "start-api": "NODE_ENV=development babel-node ./bin/api.js",
-    "start-server": "NODE_ENV=development babel-node ./bin/server.js",
+    "dev": "concurrently --kill-others \"npm run dev-api\" \"npm run dev-server\" \"npm run webpack-dev-server\"",
+    "dev-api": "NODE_ENV=development nodemon --exec babel-node ./bin/api.js",
+    "dev-server": "NODE_ENV=development nodemon --exec babel-node ./bin/server.js",
     "webpack-dev-server": "NODE_ENV=development babel-node ./bin/webpack-dev-server.js",
+    "start": "concurrently --kill-others \"npm run start-api\" \"npm run start-server\"",
+    "start-api": "NODE_ENV=production babel-node ./bin/api.js",
+    "start-server": "NODE_ENV=production babel-node ./bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -45,6 +48,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
+    "nodemon": "^1.11.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.0"
   }
