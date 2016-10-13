@@ -31,3 +31,16 @@ if (process.env.NODE_ENV !== 'production') {
 if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
   console.error('Server side react render was discarded, make sure your initial render does not contain any client-side code')
 }
+
+if (__DEVTOOLS__ && !global.devToolsExtension) {
+  const DevTools = require('./containers/DevTools'); // eslint-disable-line
+  ReactDOM.render(
+    <Provider store={store} key="provider">
+      <div>
+        {component}
+        <DevTools />
+      </div>
+    </Provider>,
+    dest
+  );
+}

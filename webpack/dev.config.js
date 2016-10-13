@@ -40,5 +40,12 @@ module.exports = {
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
+    new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __DEVTOOLS__: true,
+      'process.env': {
+        NODE_ENV: '"development"',
+      },
+    }),
   ],
 };

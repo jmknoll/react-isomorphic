@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-redux-router';
+import { routerReducer } from 'react-router-redux';
 
 module.exports = combineReducers({
-  router: routerReducer
+  routing: routerReducer
 })
 

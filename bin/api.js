@@ -13,6 +13,6 @@ app.listen(apiPort, (err) => {
   if (err) {
     console.error(err)
   } else {
-    console.info('Api listening on port ${apiPort}')
+    console.info(`Api listening on port ${apiPort}`)
   }
 });

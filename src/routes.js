@@ -10,7 +10,7 @@ import {
 } from './containers';
 
 export default (store) => { // eslint-disable-line}
-  (
+  return (
     <Route path='/' component={App}>
       { /* Home route  */ }
       <IndexRoute component={Home} />
@@ -19,3 +19,6 @@ export default (store) => { // eslint-disable-line}
     </Route>
   );
 };
+
+/* eslint react/jsx-filename-extension: 0 */
+
