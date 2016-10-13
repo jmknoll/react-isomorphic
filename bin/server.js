@@ -71,16 +71,11 @@ app.use((req, res) => {
     }
   });
 });
+
 app.listen(port, (err) => {
   if (err) {
     console.error(err);
   } else {
     console.info(`Server listening on port ${port}!`);
-  }
-});app.listen(port, (err) => {
-  if (err) {
-    console.error(err)
-  } else {
-    console.info(`Server listening on port ${port}`)
   }
 });
