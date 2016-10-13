@@ -11,7 +11,9 @@
     "start": "concurrently --kill-others \"npm run start-api\" \"npm run start-server\"",
     "start-api": "NODE_ENV=production babel-node ./bin/api.js",
     "start-server": "NODE_ENV=production babel-node ./bin/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
